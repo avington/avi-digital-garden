@@ -1,0 +1,27 @@
+{
+  "name": "finance",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "api/finance/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "finance:build",
+        "runBuildTargetDependencies": true,
+        "port": 3000
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "finance:build:development"
+        },
+        "production": {
+          "buildTarget": "finance:build:production"
+        }
+      }
+    }
+  }
+}

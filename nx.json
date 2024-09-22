@@ -33,6 +33,15 @@
       "plugin": "@nx/jest/plugin",
       "options": {
         "targetName": "test"
+      },
+      "exclude": ["api/finance-e2e/**/*"]
+    },
+    {
+      "plugin": "@nx/webpack/plugin",
+      "options": {
+        "buildTargetName": "build",
+        "serveTargetName": "serve",
+        "previewTargetName": "preview"
       }
     }
   ],
@@ -40,6 +49,9 @@
     "e2e-ci--**/*": {
       "dependsOn": ["^build"]
     }
+  },
+  "runners": {
+    "useDaemonProcess": true
   },
   "generators": {
     "@nx/react": {

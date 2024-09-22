@@ -31,7 +31,8 @@
     "serve": {
       "executor": "@nx/rspack:dev-server",
       "options": {
-        "buildTarget": "site:build:development"
+        "buildTarget": "site:build:development",
+        "port": 60000
       },
       "configurations": {
         "development": {},
