@@ -1,0 +1,19 @@
+{
+  "name": "api-finance",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/api/fincance/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/api/fincance",
+        "main": "libs/api/fincance/src/index.ts",
+        "tsConfig": "libs/api/fincance/tsconfig.lib.json",
+        "assets": ["libs/api/fincance/*.md"]
+      }
+    }
+  }
+}
