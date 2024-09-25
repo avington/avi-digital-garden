@@ -1,5 +1,8 @@
+import 'express-async-errors';
 import { Request, Response } from 'express';
 import portfolioSchema from '../schemas/portfolio.schema';
+import { StatusCodes } from 'http-status-codes';
+import { NotFoundError } from '@avi/api/utilities';
 
 /**
  * Retrieves all portfolios for the user specified in the environment variable.
@@ -13,7 +16,7 @@ export const getPortfolios = async (req: Request, res: Response) => {
   const user = process.env['NX_PUBLIC_USER_ID'] ?? 'anonymous';
 
   const portfolios = await portfolioSchema.find({ user });
-  res.status(200).json(
+  res.status(StatusCodes.OK).json(
     portfolios.map((portfolio) => ({
       ...portfolio.toObject(),
       id: portfolio._id,
@@ -24,11 +27,13 @@ export const getPortfolios = async (req: Request, res: Response) => {
 export const getPortfolio = async (req: Request, res: Response) => {
   const id = req.params?.['id'] ?? '';
   const portfolio = await portfolioSchema.findById(id);
-  if (!portfolio) {
-    res.status(404).json({ msg: 'Portfolio not found' });
-    return;
-  }
-  res.status(200).json({ ...portfolio.toObject(), id: portfolio._id });
+
+  if (!portfolio)
+    throw new NotFoundError(`Portfolio not found with the provided ID: ${id}`);
+
+  res
+    .status(StatusCodes.OK)
+    .json({ ...portfolio.toObject(), id: portfolio._id });
 };
 
 /**
@@ -52,7 +57,9 @@ export const createPortfolio = async (req: Request, res: Response) => {
     created: new Date(),
   });
 
-  res.status(201).json({ ...newPortfolio.toObject(), id: newPortfolio._id });
+  res
+    .status(StatusCodes.CREATED)
+    .json({ ...newPortfolio.toObject(), id: newPortfolio._id });
 };
 
 /**
@@ -72,10 +79,12 @@ export const updatePortfolio = async (req: Request, res: Response) => {
     { new: true }
   );
   if (!portfolio) {
-    res.status(404).json({ msg: 'Portfolio not found' });
+    res.status(StatusCodes.NOT_FOUND).json({ msg: 'Portfolio not found' });
     return;
   }
-  res.status(200).json({ ...portfolio.toObject(), id: portfolio._id });
+  res
+    .status(StatusCodes.OK)
+    .json({ ...portfolio.toObject(), id: portfolio._id });
 };
 
 /**
@@ -89,8 +98,8 @@ export const deletePortfolio = async (req: Request, res: Response) => {
   const id = req.params?.['id'] ?? '';
   const portfolio = await portfolioSchema.findByIdAndDelete(id);
   if (!portfolio) {
-    res.status(404).json({ msg: 'Portfolio not found' });
+    res.status(StatusCodes.NOT_FOUND).json({ msg: 'Portfolio not found' });
     return;
   }
-  res.status(200).json({ msg: 'Portfolio deleted' });
+  res.status(StatusCodes.OK).json({ msg: 'Portfolio deleted' });
 };

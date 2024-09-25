@@ -1,10 +1,7 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
 import 'express-async-errors';
+import { errorHandlerMiddleware } from '@avi/api/utilities';
 import dotenv from 'dotenv';
-import express, { Request, Response } from 'express';
+import express from 'express';
 import morgan from 'morgan';
 import * as path from 'path';
 
@@ -35,10 +32,7 @@ app.use(express.json());
 app.use('/api/v1/portfolios', portfolioRouter);
 
 // log all async errors
-app.use((err: Error, req: Request, res: Response) => {
-  console.error(err);
-  res.status(500).json({ msg: 'Something went wrong' });
-});
+app.use(errorHandlerMiddleware);
 
 const port = process.env.NX_PUBLIC_FINANCE_PORT;
 
