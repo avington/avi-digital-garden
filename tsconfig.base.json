@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@avi/api/finance": ["libs/api/fincance/src/index.ts"],
+      "@avi/api/utilities": ["libs/api/utilities/src/index.ts"],
       "@avi/global/models": ["libs/models/src/index.ts"]
     }
   },
