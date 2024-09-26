@@ -15,8 +15,20 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@avi/api/finance": ["libs/api/fincance/src/index.ts"],
       "@avi/api/utilities": ["libs/api/utilities/src/index.ts"],
+      "@avi/client/features/anonymous": [
+        "libs/client/features/anonymous/src/index.ts"
+      ],
+      "@avi/client/features/finance": [
+        "libs/client/features/finance/src/index.ts"
+      ],
+      "@avi/client/shared/components": [
+        "libs/client/shared/components/src/index.ts"
+      ],
+      "@avi/client/shared/core": ["libs/client/shared/core/src/index.ts"],
+      "@avi/client/shared/layouts": ["libs/client/shared/layouts/src/index.ts"],
+      "@avi/client/shared/store": ["libs/client/shared/store/src/index.ts"],
+      "@avi/client/shared/testing": ["libs/client/shared/testing/src/index.ts"],
       "@avi/global/models": ["libs/models/src/index.ts"]
     }
   },

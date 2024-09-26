@@ -1,0 +1,9 @@
+{
+  "name": "client-anonymous",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/client/features/anonymous/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project client-anonymous --web",
+  "targets": {}
+}
