@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@import './styles/colors';
+@import './styles/typography';
+@import './styles/reset';
+@import './styles/heading';
+@import './styles/forms';
+
+@import './styles/utils/flex';
+@import './styles/utils/height';
+@import './styles/utils/width';
+@import './styles/utils/padding';
+@import './styles/utils/margin';
